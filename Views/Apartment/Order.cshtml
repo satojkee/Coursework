@@ -1,0 +1,70 @@
+﻿@model ReservationModel
+
+@{
+	Layout = "~/Views/Shared/_ContainerDefault.cshtml";
+}
+
+<div class="vertical-center">
+	<div class="form-wrapper">
+		<h3>Бронювання апартаментів № @ViewBag.Apartment.RealId</h3>
+		<div class="text-dark text-opacity-75 mb-4">
+			<i class="bi bi-info-circle"></i>
+			&nbsp;
+			Ми зв'яжемося з вами після успішного заповнення форми
+		</div>
+		<form asp-action="Order">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input asp-for="ApartmentId" value="@ViewBag.Apartment.Id" hidden>
+			<div class="mb-3">
+				<label asp-for="ClientName" class="control-label">Як до вас звертатися?</label>
+				<input asp-for="ClientName" class="form-control" placeholder="John Doe">
+				<span asp-validation-for="ClientName" class="text-danger"></span>
+				<div class="form-text">
+					Ми будемо використовувати введене ім'я при звертанні до вас.
+				</div>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ClientEmail" class="control-label">Електронна адреса</label>
+				<input asp-for="ClientEmail" class="form-control" placeholder="John.Doe@gmail.com">
+				<span asp-validation-for="ClientEmail" class="text-danger"></span>
+				<div class="form-text">
+					Ми можемо використовувати цю адресу для зв'язку з вами.
+				</div>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ClientTel" class="control-label">Номер телефону</label>
+				<input asp-for="ClientTel" class="form-control" placeholder="0670001111" pattern="{0}[1]-{0-9}[2]-{0-9}[7]" maxlength="10">
+				<span asp-validation-for="ClientTel" class="text-danger"></span>
+				<div class="form-text">
+					Ми можемо використовувати ваш номер телефону для зв'язку з вами.
+				</div>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ArrivingDate" class="control-label">Дата поселення</label>
+				<input asp-for="ArrivingDate" class="form-control">
+				<span asp-validation-for="ArrivingDate" class="text-danger"></span>
+				<div class="form-text">
+					День прибуття, поселення відбудеться о 14:00.
+				</div>
+			</div>
+			<div class="mb-3">
+				<label asp-for="EvictionDate" class="control-label">Дата виселення</label>
+				<input asp-for="EvictionDate" class="form-control">
+				<span asp-validation-for="EvictionDate" class="text-danger"></span>
+				<div class="form-text">
+					Кінцева дата вашого перебування у нас, виселення о 12:00.
+				</div>
+			</div>
+			<div class="mt-2">
+				<input type="submit" value="Забронювати" class="btn btn-primary">
+			</div>
+		</form>
+	</div>
+
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

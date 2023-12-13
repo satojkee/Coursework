@@ -1,0 +1,17 @@
+﻿@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+	@RenderSection("Style", false)
+}
+
+@section Scripts {
+	@RenderSection("Scripts", false)
+}
+
+<div class="container">
+	<main class="pb-3" role="main">
+		@RenderBody()
+	</main>
+</div>

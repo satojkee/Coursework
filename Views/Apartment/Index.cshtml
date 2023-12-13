@@ -1,0 +1,124 @@
+﻿@using Hotel.ViewModels
+@model List<ApartmentViewModel>
+
+@{
+	Layout = "~/Views/Shared/_ContainerDefault.cshtml";
+	ViewData["Title"] = "Номери";
+}
+
+<div class="row gy-4 gx-4">
+	@{
+		foreach (var apartment in Model)
+		{
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4">
+				<div class="card px-0 h-100">
+					<div id="carousel-@Model.IndexOf(apartment)" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+							@{
+								foreach (var image in apartment.Images)
+								{
+									if (apartment.Images.IndexOf(image) == 0)
+									{
+										<div class="carousel-item active">
+											<a href="Image/Delete/@image.Id">
+												<img class="d-block w-100 img-blur" src="@image.Url">
+											</a>
+										</div>
+									}
+									else
+									{
+										<div class="carousel-item">
+											<a href="Image/Delete/@image.Id">
+												<img class="d-block w-100 img-blur" src="@image.Url">
+											</a>
+										</div>
+									}
+								}
+							}
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carousel-@Model.IndexOf(apartment)" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carousel-@Model.IndexOf(apartment)" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+					<div class="card-body">
+						<div class="d-flex justify-content-end mb-2">
+							<a class="btn btn-sm btn-outline-secondary me-1" href="/Apartment/Details/@apartment.Id">Детальніше</a>
+							<a class="btn btn-sm btn-primary me-1" href="/Apartment/Order/@apartment.Id">Забронювати</a>
+							<a class="btn btn-sm btn-success me-1" href="/Image/Create/@apartment.Id">
+								<i class="bi bi-file-earmark-arrow-up"></i>
+							</a>
+							<a class="btn btn-sm btn-warning me-1" href="/Apartment/Edit/@apartment.Id">
+								<i class="bi bi-pencil-square"></i>
+							</a>
+							<a class="btn btn-sm btn-danger" href="/Apartment/Delete/@apartment.Id">
+								<i class="bi bi-trash3"></i>
+							</a>
+						</div>
+						<table class="table table-sm table-borderless">
+							<tbody>
+								<tr>
+									<th>Тип</th>
+									<td>
+										@apartment.Type
+									</td>
+								</tr>
+								<tr>
+									<th>Ціна за ніч</th>
+									<td>
+										@apartment.Price
+										грн
+									</td>
+								</tr>
+								<tr>
+									<th>Площа</th>
+									<td>
+										@apartment.Area
+										<span>
+											м <sup>2</sup>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<th>Поверх</th>
+									<td>@apartment.Floor</td>
+								</tr>
+								<tr>
+									<th>Номер апартаментів</th>
+									<td>@apartment.RealId</td>
+								</tr>
+								<tr>
+									<th>К-сть кімнат</th>
+									<td>@apartment.RoomsCount</td>
+								</tr>
+								<tr>
+									<th>Наявність кондиціонеру</th>
+									@{
+										if (apartment.HasConditioner)
+										{
+											<td>
+												<i class="bi bi-check2 text-success"></i>
+											</td>
+										}
+										else
+										{
+											<td>
+												<i class="bi bi-x-lg text-danger"></i>
+											</td>
+										}
+									}
+								</tr>
+							</tbody>
+						</table>
+						<h5 class="card-title">@apartment.Title</h5>
+						<p class="card-text">@apartment.ShortDescription</p>
+					</div>
+				</div>
+			</div>
+		}
+	}
+</div>

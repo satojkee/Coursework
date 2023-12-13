@@ -1,0 +1,86 @@
+﻿@model ApartmentModel;
+
+@{
+    Layout = "~/Views/Shared/_ContainerDefault.cshtml";
+    ViewData["Title"] = "Додати";
+}
+
+<h3>Додати кімнату</h3>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Id" hidden>
+    <div class="form-group mb-3">
+        <label asp-for="RealId" class="control-label">Номер кімнати</label>
+        <input asp-for="RealId" class="form-control" />
+        <span asp-validation-for="RealId" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="FloorId" class="control-label">Поверх</label>
+        <select asp-for="FloorId" class="form-control">
+            @{
+                foreach(var floor in ViewBag.Floors)
+                {
+                    <option value="@floor.Id">@floor.Value</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="FloorId" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="TypeId" class="control-label">Тип</label>
+        <select asp-for="TypeId" class="form-control">
+            @{
+                foreach (var type in ViewBag.ApartmentTypes)
+                {
+                    <option value="@type.Id">@type.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="FloorId" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Price" class="control-label">Ціна за одну ніч</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Area" class="control-label">Площа м<sup>2</sup></label>
+        <input asp-for="Area" class="form-control" />
+        <span asp-validation-for="Area" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="RoomsCount" class="control-label">К-сть кімнат</label>
+        <input asp-for="RoomsCount" class="form-control" />
+        <span asp-validation-for="RoomsCount" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Title" class="control-label">Заголовок</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="ShortDescription" class="control-label">Короткий опис</label>
+        <textarea asp-for="ShortDescription" class="form-control"></textarea>
+        <span asp-validation-for="ShortDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Description" class="control-label">Опис</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <input asp-for="HasConditioner" class="form-check-input" />
+        <label asp-for="HasConditioner" class="form-check-label">Наявність кондиціонеру</label>
+        <span asp-validation-for="HasConditioner" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <input type="submit" value="Додати" class="btn btn-primary" />
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

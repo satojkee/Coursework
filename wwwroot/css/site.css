@@ -1,0 +1,80 @@
+html {
+  font-size: 14px;
+}
+
+body {
+    font-family: "Rubik";
+    min-height: 100vh;
+}
+
+.form-wrapper {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: auto;
+  max-width: 40vw;
+  padding: 2rem;
+}
+
+.vertical-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Solution start: https://stackoverflow.com/questions/73561420/how-to-make-images-the-same-height-in-a-bootstrap-5-carousel */
+.carousel-inner {
+  height: 0;
+  padding-bottom: 100%; /* this sets carousel aspect ratio (1:1) */
+}
+
+.carousel-item {
+  position: absolute !important; /* Bootstrap is insistent */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.carousel-item img {
+  height: 100%; /* Bootstrap handles width already */
+  object-fit: cover; /* or 'contain' if you want stretch instead of crop */
+}
+/* Solution end*/
+
+
+@media only screen and (max-width: 800px) {
+  .form-wrapper {
+    border: 0px;
+    box-shadow: none;
+    max-width: 100vw;
+    padding: 4rem;
+  }
+}
+
+/* For medium screens and tablets */
+@media only screen and (max-width: 1200px) {
+  .form-wrapper {
+    max-width: 60vw;
+  }
+}
+
+.img-blur {}
+
+.img-blur:hover {
+    filter: blur(4px);
+}

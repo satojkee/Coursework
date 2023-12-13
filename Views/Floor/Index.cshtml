@@ -1,0 +1,41 @@
+﻿@model List<FloorModel>
+
+@{
+    Layout = "~/Views/Shared/_ContainerDefault.cshtml";
+    ViewData["Title"] = "Поверхи";
+}
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Поверх</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var floor in Model)
+            {
+                <tr>
+                    <td>@floor.Value</td>
+                    <td>
+                        <a class="text-warning" href="/Floor/Edit/@floor.Id">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-danger" href="/Floor/Delete/@floor.Id">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div class="d-flex justify-content-end">
+    <a class="btn btn-primary" href="/Floor/Create">
+        <i class="bi bi-plus-square"></i>
+    </a>
+</div>
