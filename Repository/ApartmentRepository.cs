@@ -4,7 +4,6 @@ using Hotel.Data;
 
 using Microsoft.EntityFrameworkCore;
 using Hotel.ViewModels;
-using System.ComponentModel;
 
 namespace Hotel.Repository
 {
@@ -28,6 +27,7 @@ namespace Hotel.Repository
 			// This method returns all ApartmentTypeModel instances stored in the db
 			return _context.ApartmentTypes.ToList();
         }
+
 		public ICollection<ApartmentModel> GetApartments()
         {
             /* This method returns the collection of <ApartmentModel> objectes.
@@ -83,7 +83,7 @@ namespace Hotel.Repository
 
 		public ApartmentModel? GetApartment(int id)
 		{
-			/* It tries to find the room by specified Id.
+			/* It tries to find AppartmentModel by specified Id.
             Returns ApartmentViewModel instance or null. */
 			return _context.Apartments
 				.Include(t => t.Type)
@@ -92,6 +92,15 @@ namespace Hotel.Repository
                 .Where(t => t.Id == id)
 				.FirstOrDefault();
 		}
+
+        public ApartmentTypeModel? GetApartmentType(int id)
+        {
+            /* It tries to find the room by specified Id.
+            Returns ApartmentTypeModel instance or null. */
+            return _context.ApartmentTypes
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+        }
 
         public FloorModel? GetFloor(int id)
         {
@@ -124,6 +133,7 @@ namespace Hotel.Repository
         {
             /* This method adds a new RoomTypeModel to the db.
             Returns this.Save() as operation result. */
+            apartmentType.Id = 0;
 
             _context.ApartmentTypes.Add(apartmentType);
 
@@ -189,6 +199,20 @@ namespace Hotel.Repository
             return await Save();
         }
 
+        public async Task<bool> RemoveType(int id)
+        {
+            /* This method removes ApartmentTypeModel instance by its id. 
+            Returns this.Save() as operation result. */
+            ApartmentTypeModel? instance = GetApartmentType(id);
+
+            if (instance != null)
+            {
+                _context.Remove(instance);
+            }
+
+            return await Save();
+        }
+
 		public async Task<bool> RemoveImage(int id)
 		{
 			/* This method removes ApartmentImageModel instance by its id. 
@@ -245,5 +269,20 @@ namespace Hotel.Repository
 
             return await Save();
         }
-    }
+		public async Task<bool> EditType(ApartmentTypeModel updatedType)
+		{
+			/* This method updates FloorModel instance by its id. 
+            Returns this.Save() as operation result. */
+			ApartmentTypeModel? storedInstance = GetApartmentType(updatedType.Id);
+
+			if (storedInstance != null)
+			{
+				storedInstance.Name = updatedType.Name;
+
+				_context.Update(storedInstance);
+			}
+
+			return await Save();
+		}
+	}
 }

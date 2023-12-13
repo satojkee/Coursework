@@ -59,6 +59,7 @@ namespace Hotel.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public async Task<ActionResult> Delete(int id)
         {
             /* Removes FloorModel by its id*/

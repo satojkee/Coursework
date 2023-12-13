@@ -23,7 +23,11 @@ namespace Hotel.Interfaces
 
         public FloorModel? GetFloor(int id);
 
+        public ApartmentTypeModel? GetApartmentType(int id);
+
         public Task<bool> RemoveFloor(int id);
+
+        public Task<bool> RemoveType(int id);
 
         public Task<bool> RemoveApartment(int id);
 
@@ -33,7 +37,9 @@ namespace Hotel.Interfaces
 
         public Task<bool> EditApartment(ApartmentModel updatedInstance);
 
-        public Task<bool> EditFloor(FloorModel updatedFloor);
+        public Task<bool> EditType(ApartmentTypeModel updatedInstance);
+
+        public Task<bool> EditFloor(FloorModel updatedInstance);
 
         public Task<bool> AddFloor(FloorModel floor);
 

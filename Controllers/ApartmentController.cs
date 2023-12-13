@@ -117,7 +117,6 @@ namespace Hotel.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ApartmentModel apartment)
         {
             /* It handles CreateApartment form submission. */
